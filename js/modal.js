@@ -54,7 +54,7 @@
 
 		$modalContainer.classList.add('is-visible');
 
-		$modalContainer.addEventListener('click', (e) => {
+		$($modalContainer).on('click', (e) => {
 			var target = e.target;
 			console.log(e.target)
 			if (target === $modalContainer) {
@@ -63,7 +63,7 @@
 		});
 	};
 
-	window.addEventListener('keydown', (e) => { //listening for an event (ESC) of the browser window
+	$(window).on('keydown', (e) => { //listening for an event (ESC) of the browser window
 		var $modalContainer = document.querySelector('#modal-container');
 		if (e.key === 'Escape' && $modalContainer.classList.contains('is-visible')) {
 			hideModal();
