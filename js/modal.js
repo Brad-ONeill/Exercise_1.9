@@ -13,7 +13,7 @@
 	//		showModal();
 	//	});
 
-	function showModal(title, image, height, pelement) {
+	function showModal(title, image, height, etypes) {
 
 		var $modalContainer = document.querySelector('#modal-container');
 		$modalContainer.innerHTML = '';
@@ -44,10 +44,10 @@
 			.text('height: ' + height + 'm')
 			.appendTo(modal);
 
-		var $contentElement = $('<p></p>')
-			.text(('Elements: ' + pelement)
-				.replace(',', ', '))
-			.appendTo(modal);
+//		var $contentElement = $('<p></p>')
+//			.text(('Elements: ' + etypes)
+//				.replace(',', ', '))
+//			.appendTo(modal);
 		//--
 
 		$modalContainer.appendChild(modal);
