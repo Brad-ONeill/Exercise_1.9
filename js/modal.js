@@ -40,15 +40,22 @@ function showModal(title, image, height, etypes) {
 			hideModal();
 
 		});
-
+	
 	$modalContainer.on('click', (e) => {
 		var target = e.target;
 		console.log(e.target)
-		console.log($modalContainer.get())
 		if (target === $modalContainer) {
 			hideModal();
 		}
 	});
+
+	//	$modalContainer.on('click', (e) => {
+	//		var target = e.target;
+	//		console.log(e.target)
+	//		if (target === $modalContainer) {
+	//			hideModal();
+	//		}
+	//	});
 };
 
 
