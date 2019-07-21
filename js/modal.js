@@ -1,71 +1,60 @@
-	function showModal() {
-		var $modalContainer = $('#modal-container')
-			.addClass('is-visible');
-	}
+function showModal() {
+	var $modalContainer = $('#modal-container')
+		.addClass('is-visible');
+}
 
-	function hideModal() {
-		var $modalContainer = $('#modal-container')
-			.removeClass('is-visible');
-	}
+function hideModal() {
+	var $modalContainer = $('#modal-container')
+		.removeClass('is-visible');
+}
 
-	//modal IFFE
-	//	document.querySelector('#modal-button').addEventListener('click', () => {
-	//		showModal();
-	//	});
+//modal IFFE
+//	document.querySelector('#modal-button').addEventListener('click', () => {
+//		showModal();
+//	});
 
-	function showModal(title, image, height, etypes) {
+function showModal(title, image, height, etypes) {
 
-		var $modalContainer = document.querySelector('#modal-container');
-		$modalContainer.innerHTML = '';
+	var $modalContainer = $('#modal-container')
+		.empty();
 
-		var modal = document.createElement('div');
-		modal.classList.add('modal');
+	var modal = `<div class="modal">
+						<h1>${title}</h1>
+						<button id="modal-close" class="modal-close">&times;</button>
+						<img src="${image}">
+						<p>Height: ${height}m</p>
+						<p>Type: ${etypes}</p>
+					</div>`;
 
-		//working
-		var $titleElement = $('<h1></h1>')
-			.text(title)
-			.appendTo(modal);
+	//		var $contentElement = $('<p></p>')
+	//			.text(('Elements: ' + etypes)
+	//				.replace(',', ', '))
+	//			.appendTo(modal);
 
-		var $closeButton = $('<button>')
-			.attr('id', "modal-close")
-			.html('&times')
-			.on('click', function () {
-				hideModal();
-			});
-		$closeButton.addClass('modal-close')
-			.appendTo(modal)
+	$modalContainer.append(modal);
 
-		var $contentImage = $('<img>')
-			.attr('src', image)
-			.appendTo(modal);
+	$modalContainer.addClass('is-visible');
 
+	$('#modal-close')
+		.on('click', function () {
+			hideModal();
 
-		var $contentHeight = $('<p></p>')
-			.text('height: ' + height + 'm')
-			.appendTo(modal);
-
-//		var $contentElement = $('<p></p>')
-//			.text(('Elements: ' + etypes)
-//				.replace(',', ', '))
-//			.appendTo(modal);
-		//--
-
-		$modalContainer.appendChild(modal);
-
-		$modalContainer.classList.add('is-visible');
-
-		$($modalContainer).on('click', (e) => {
-			var target = e.target;
-			console.log(e.target)
-			if (target === $modalContainer) {
-				hideModal();
-			}
 		});
-	};
 
-	$(window).on('keydown', (e) => { //listening for an event (ESC) of the browser window
-		var $modalContainer = document.querySelector('#modal-container');
-		if (e.key === 'Escape' && $modalContainer.classList.contains('is-visible')) {
+	$modalContainer.on('click', (e) => {
+		var target = e.target;
+		console.log(e.target)
+		console.log($modalContainer.get())
+		if (target === $modalContainer) {
 			hideModal();
 		}
 	});
+};
+
+
+$(window).on('keydown', (e) => {
+	var $modalContainer = $('#modal-container');
+	if (e.key === 'Escape' && $modalContainer.classList.contains('is-visible')) {
+		hideModal();
+	}
+});
