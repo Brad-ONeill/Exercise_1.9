@@ -1,21 +1,16 @@
 function showModal() {
-	var $modalContainer = $('#modal-container')
+	$('#modal-container')
 		.addClass('is-visible');
 }
 
 function hideModal() {
-	var $modalContainer = $('#modal-container')
+	$('#modal-container')
 		.removeClass('is-visible');
 }
 
-//modal IFFE
-//	document.querySelector('#modal-button').addEventListener('click', () => {
-//		showModal();
-//	});
+function showModal(title, image, height, elements) {
 
-function showModal(title, image, height, etypes) {
-
-	var $modalContainer = $('#modal-container')
+	var modalContainer = $('#modal-container')
 		.empty();
 
 	var modal = `<div class="modal">
@@ -23,45 +18,30 @@ function showModal(title, image, height, etypes) {
 						<button id="modal-close" class="modal-close">&times;</button>
 						<img src="${image}">
 						<p>Height: ${height}m</p>
-						<p>Type: ${etypes}</p>
+						<p>Type: ${elements.toString().replace(',',', ')}</p>
 					</div>`;
 
-	//		var $contentElement = $('<p></p>')
-	//			.text(('Elements: ' + etypes)
-	//				.replace(',', ', '))
-	//			.appendTo(modal);
+	modalContainer.append(modal);
 
-	$modalContainer.append(modal);
-
-	$modalContainer.addClass('is-visible');
+	modalContainer.addClass('is-visible');
 
 	$('#modal-close')
-		.on('click', function () {
+		.on('click', () => {
 			hideModal();
-
 		});
 	
-	$modalContainer.on('click', (e) => {
+	
+	$('#modal-container').on('click', (e) => {
 		var target = e.target;
-		console.log(e.target)
-		if (target === $modalContainer) {
+		if (target.id === 'modal-container') {
 			hideModal();
 		}
 	});
-
-	//	$modalContainer.on('click', (e) => {
-	//		var target = e.target;
-	//		console.log(e.target)
-	//		if (target === $modalContainer) {
-	//			hideModal();
-	//		}
-	//	});
 };
 
 
 $(window).on('keydown', (e) => {
-	var $modalContainer = $('#modal-container');
-	if (e.key === 'Escape' && $modalContainer.classList.contains('is-visible')) {
+	if (e.key === 'Escape' && $('#modal-container').hasClass('is-visible')) {
 		hideModal();
 	}
 });
