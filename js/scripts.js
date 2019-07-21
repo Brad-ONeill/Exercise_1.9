@@ -10,7 +10,6 @@ var pokemonRepository = (function () { //pokemonRepository is the name of the II
 		return repo;
 	}
 
-	//Working jQuery--
 	function loadList() {
 		return $.ajax(apiUrl)
 			.then(function (result) {
@@ -31,11 +30,17 @@ var pokemonRepository = (function () { //pokemonRepository is the name of the II
 		
 		return $.ajax(url)
 			.then(function (details) {
+				var elementTypes = []; //element types are stored as arrays so...
+			
+				$.each(details.types, function(key, item){ //for each pokemon...
+					elementTypes.push(item.type.name) //push the array details into var types...
+				})
+
 				return {
 					name: details.name,
 					imageUrl: details.sprites.front_default,
 					height: details.height,
-					//types: details.types
+					types: elementTypes
 				}
 			
 			})
@@ -43,38 +48,32 @@ var pokemonRepository = (function () { //pokemonRepository is the name of the II
 				console.error(e);
 			});
 	}
-	//End---
-	
-	//Working--
+
 	function showDetails(pokemon) {
 		pokemonRepository.loadDetails(pokemon)
 			.then(function (poke) {
 				showModal(poke.name, poke.imageUrl, poke.height, poke.types)
 			})
 	}
-	//---
 
-	//Working jQuery--
 	function addListItem(entry) {
-		var $ul = $('.pokeList');
-
+		
 		//Using template literals (``)
-		var $li = `<li class="pokedexItem"> 
+		var listItem = `<li class="pokedexItem"> 
 						<button class="infoButton" data-url="${entry.detailsUrl}">
 							${entry.name}
 						</button>
 				</li>`;
-		$('ul')
-			.append($li);
+		$('.pokeList')
+			.append(listItem);
 	}
 
-	$('ul')
+	$('.pokeList')
 		.on('click', '.infoButton', function () {
 			let url = $(this).data('url')
 			showDetails(url)
 		})
 
-	//End---
 	return {
 		add: add,
 		getALL: getALL,
@@ -86,13 +85,10 @@ var pokemonRepository = (function () { //pokemonRepository is the name of the II
 })();
 
 pokemonRepository.loadList().then(function () {
-	pmon.forEach(function (entry) {
+	$.each(pmon, (key, entry) => {
 		pokemonRepository.addListItem(entry);
 	});
 });
 
 //pmon is the full repository
 var pmon = pokemonRepository.getALL();
-
-//writes all the pokemon to the console
-console.log(pmon);
