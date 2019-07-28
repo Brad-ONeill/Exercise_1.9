@@ -60,7 +60,7 @@ var pokemonRepository = (function () { //pokemonRepository is the name of the II
 		
 		//Using template literals (``)
 		var listItem = `<li class="pokedexItem"> 
-						<button class="infoButton" data-url="${entry.detailsUrl}">
+						<button class="btn btn-info btn-sm" data-url="${entry.detailsUrl}">
 							${entry.name}
 						</button>
 				</li>`;
