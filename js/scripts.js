@@ -59,11 +59,13 @@ var pokemonRepository = (function () { //pokemonRepository is the name of the II
 	function addListItem(entry) {
 		
 		//Using template literals (``)
-		var listItem = `<li class="pokedexItem"> 
-						<button class="btn btn-info btn-sm" data-url="${entry.detailsUrl}">
-							${entry.name}
-						</button>
-				</li>`;
+		var listItem = `<li class="col-sm-12 col-md-6 col-lg-4">
+							<div class="pokedexItem">
+								<button class="btn btn-info btn-sm col" data-url="${entry.detailsUrl}">
+									${entry.name}
+								</button>
+							</div>
+						</li>`;
 		$('.pokeList')
 			.append(listItem);
 	}
