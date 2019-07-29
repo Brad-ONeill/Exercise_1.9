@@ -30,14 +30,18 @@ h2 {
 li {
 	list-style-position: outside;
 	list-style: none;
-	
+
 }
-pokedexItem{background-color: #fff;
+
+.pokedexItem {
+	margin: 15px;
+	background-color: #fff;
 	padding: 10px;
 	height: 50px;
 	line-height: 30px;
 	border: 1px solid #17a2b8;
-	border-radius: 4px;}
+	border-radius: 4px;
+}
 
 img {
 	display: block;
