@@ -16,23 +16,23 @@ var pokemonRepository = (function () { //pokemonRepository is the name of the II
 				result.results.forEach(function (item) {
 					var pokemon = {
 						name: item.name,
-						detailsUrl: item.url						
+						detailsUrl: item.url
 					};
-					
+
 					add(pokemon);
 				});
 			});
 	}
 
 	function loadDetails(item) {
-		
+
 		var url = item;
-		
+
 		return $.ajax(url)
 			.then(function (details) {
 				var elementTypes = []; //element types are stored as arrays so...
-			
-				$.each(details.types, function(key, item){ //for each pokemon...
+
+				$.each(details.types, function (key, item) { //for each pokemon...
 					elementTypes.push(item.type.name) //push the array details into var types...
 				})
 
@@ -42,22 +42,16 @@ var pokemonRepository = (function () { //pokemonRepository is the name of the II
 					height: details.height,
 					types: elementTypes
 				}
-			
+
 			})
 			.catch(function (e) {
 				console.error(e);
 			});
 	}
 
-	function showDetails(pokemon) {
-		pokemonRepository.loadDetails(pokemon)
-			.then(function (poke) {
-				showModal(poke.name, poke.imageUrl, poke.height, poke.types)
-			})
-	}
 
 	function addListItem(entry) {
-		
+
 		//Using template literals (``)
 		var listItem = `<li class="list-group-item col-6 col-md-4 col-lg-3 col-xl-2">
 							<div class="pokedexItem">
@@ -72,11 +66,15 @@ var pokemonRepository = (function () { //pokemonRepository is the name of the II
 			.append(listItem);
 	}
 
-//	$('.pokeList')
-//		.on('click', '.infoButton', function () {
-//			let url = $(this).data('url')
-//			showDetails(url)
-//		})
+	$('#pokeModal').on('show.bs.modal', function (pokemon) {
+		pokemonRepository.loadDetails(pokemon.relatedTarget.getAttribute('data-url'))
+			.then(function (poke) {
+				$('#pokeModalTitle').html(poke.name)
+				$('#pokeModalImage').attr('src', poke.imageUrl)
+				$('#pokeModalHeight').html(poke.height)
+				$('#pokeModalTypes').html(poke.types.join(', '))
+			})
+	})
 
 	return {
 		add: add,
