@@ -55,7 +55,7 @@ var pokemonRepository = (function () { //pokemonRepository is the name of the II
 		//Using template literals (``)
 		var listItem = `<li class="list-group-item col-6 col-md-4 col-lg-3 col-xl-2">
 							<div class="pokedexItem">
-									<button class="btn btn-info btn-sm col" data-toggle="modal"
+									<button aria-label="${entry.name}" class="btn btn-info btn-sm col" data-toggle="modal"
 									data-target="#pokeModal"
 									data-url="${entry.detailsUrl}">
 										${entry.name}
