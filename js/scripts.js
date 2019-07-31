@@ -72,11 +72,11 @@ var pokemonRepository = (function () { //pokemonRepository is the name of the II
 			.append(listItem);
 	}
 
-	$('.pokeList')
-		.on('click', '.infoButton', function () {
-			let url = $(this).data('url')
-			showDetails(url)
-		})
+//	$('.pokeList')
+//		.on('click', '.infoButton', function () {
+//			let url = $(this).data('url')
+//			showDetails(url)
+//		})
 
 	return {
 		add: add,
