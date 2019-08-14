@@ -69,12 +69,12 @@ var pokemonRepository = (function () { //pokemonRepository is the name of the II
 	$('#pokeModal').on('show.bs.modal', function (pokemon) {
 		pokemonRepository.loadDetails(pokemon.relatedTarget.getAttribute('data-url'))
 			.then(function (poke) {
-				$('#pokeModalTitle').html(poke.name)
-				$('#pokeModalImage').attr('src', poke.imageUrl)
-				$('#pokeModalHeight').html(poke.height)
-				$('#pokeModalTypes').html(poke.types.join(', '))
-			})
-	})
+				$('#pokeModalTitle').html(poke.name);
+				$('#pokeModalImage').attr('src', poke.imageUrl);
+				$('#pokeModalHeight').html(poke.height);
+				$('#pokeModalTypes').html(poke.types.join(', '));
+			});
+	});
 
 	return {
 		add: add,
